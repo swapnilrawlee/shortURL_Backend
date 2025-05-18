@@ -16,6 +16,10 @@ client = MongoClient(mongo_uri)
 db = client["url_shortener_db"]
 collection = db["urls"]
 
+@app.route('/', methods=['get'])
+def hello():
+    return jsonify("hello")
+
 def generate_short_code(long_url):
     hash_object = hashlib.md5(long_url.encode())
     short_code = base64.urlsafe_b64encode(hash_object.digest())[:6].decode()
