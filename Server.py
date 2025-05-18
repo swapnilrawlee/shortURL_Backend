@@ -9,16 +9,11 @@ import hashlib
 
 app = Flask(__name__)
 CORS(app)
-mongo_uri = os.environ.get("MONGO_URI")
-client = MongoClient(mongo_uri)
+client = MongoClient("mongodb+srv://swapnilrawle3000:Swapnil123@cluster0.88cya6k.mongodb.net/")
 
 # MongoDB setup - replace your connection string & DB/collection names
 db = client["url_shortener_db"]
 collection = db["urls"]
-
-@app.route('/', methods=['get'])
-def hello():
-    return jsonify("hello")
 
 def generate_short_code(long_url):
     hash_object = hashlib.md5(long_url.encode())
